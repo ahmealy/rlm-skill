@@ -280,17 +280,21 @@ Consult these for detailed patterns and complete code snippets:
 - **`references/primitives.md`** — Full code for every primitive (llm_query, rlm_query,
   FINAL_VAR, SHOW_VARS, state save/load, standard header/footer)
 - **`references/reasoning-pattern.md`** — Chunking strategies, error tracking, depth
-  simulation, iteration budget, cleanup, system prompt origin
+  simulation, iteration budget, cleanup
+- **`references/system-prompt.md`** — Original `RLM_SYSTEM_PROMPT` verbatim, with worked
+  examples (book chunking, batched queries, rlm_query branching, computation chaining)
 
 ### Source
 
-This skill is derived from the **[rlm](https://github.com/alexzhang13/rlm)** library
-(package: `rlms`, arXiv: 2512.24601). If working inside that repo:
+This skill is an agent-native adaptation of the **[rlm](https://github.com/alexzhang13/rlm)**
+library (package: `rlms`, arXiv: 2512.24601, MIT License) by MIT OASYS Lab.
 
-- `rlm/utils/prompts.py` → `RLM_SYSTEM_PROMPT` — original system prompt this skill adapts
-- `rlm/environments/local_repl.py` — canonical primitive implementations (llm_query, rlm_query, FINAL_VAR, SHOW_VARS)
-- `rlm/core/rlm.py` → `completion()` — the full iterative orchestration loop
+The original system prompt the library uses to instruct the model is included verbatim in
+**`references/system-prompt.md`** — read it for the ground-truth decision rules, sizing
+guidance (500K chars per sub-LLM), and worked examples (book chunking, batched queries,
+`rlm_query` branching, sqrt-2 proof).
 
-If working in a standalone repo that copied this skill, consult the upstream library for context on any primitive or pattern not covered in the reference files above.
-
-**Custom tools:** The RLM library supports `custom_tools` — a dict of callable functions injected into the REPL globals alongside `llm_query` etc. In agent mode, define helper functions at the top of each script instead. If a function is reused across iterations, persist its definition string in `state["helpers"]` and `exec()` it at script start.
+**Custom tools:** The library supports `custom_tools` — a dict of callables injected into
+the REPL globals alongside `llm_query` etc. In agent mode, define helper functions at the
+top of each script instead. If a function is reused across iterations, persist its
+definition string in `state["helpers"]` and `exec()` it at script start.
