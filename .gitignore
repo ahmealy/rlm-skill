@@ -1,0 +1,11 @@
+# working files produced by the skill during agent sessions
+_rlm_state.json
+_rlm_query.json
+_rlm_response.json
+_rlm_batch_query.json
+_rlm_batch_response.json
+_subtask_*.json
+_final_answer.json
+
+# OS
+.DS_Store
